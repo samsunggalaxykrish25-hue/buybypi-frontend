@@ -22,7 +22,6 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--pi-dark);
@@ -30,21 +29,17 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    /* Background mesh */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background:
         radial-gradient(ellipse 80% 50% at 20% 10%, rgba(107,33,214,0.25) 0%, transparent 60%),
         radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,158,11,0.08) 0%, transparent 50%),
         radial-gradient(ellipse 40% 60% at 60% 30%, rgba(155,92,246,0.1) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
-    /* ── HEADER ── */
+    /* HEADER */
     header {
       position: sticky; top: 0; z-index: 100;
       background: rgba(17,3,40,0.85);
@@ -55,23 +50,16 @@
       height: 60px;
     }
     .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.3rem;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem;
       background: linear-gradient(135deg, #c084fc, var(--pi-gold));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
     }
-    .logo span { color: var(--pi-gold); -webkit-text-fill-color: var(--pi-gold); }
-
     #authBtn {
       background: linear-gradient(135deg, var(--pi), var(--pi-light));
-      border: none; border-radius: 24px;
-      color: #fff; font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem; font-weight: 500;
+      border: none; border-radius: 24px; color: #fff;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
       padding: 8px 18px; cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
     }
-    #authBtn:active { transform: scale(0.97); }
     #userBadge {
       display: none; align-items: center; gap: 8px;
       background: var(--pi-card); border-radius: 24px;
@@ -79,744 +67,846 @@
       font-size: 0.82rem; color: var(--text-muted);
     }
     #userBadge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+    .verified { color: var(--success); font-size: 0.72rem; }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative; z-index: 1;
-      padding: 48px 20px 32px;
-      text-align: center;
-    }
-    .hero-tag {
-      display: inline-block;
-      background: rgba(107,33,214,0.25);
-      border: 1px solid rgba(155,92,246,0.35);
-      border-radius: 24px; padding: 4px 14px;
-      font-size: 0.75rem; color: var(--pi-light);
-      letter-spacing: 0.08em; text-transform: uppercase;
-      margin-bottom: 16px;
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.9rem, 7vw, 2.8rem);
-      font-weight: 800; line-height: 1.15;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, #c084fc, var(--pi-gold));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      color: var(--text-muted); font-size: 0.95rem; margin-top: 12px;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-
-    /* ── STATS BAR ── */
-    .stats {
-      display: flex; justify-content: center; gap: 0;
-      margin: 24px 20px 0;
-      background: var(--pi-card);
-      border: 1px solid var(--pi-border);
-      border-radius: 16px; overflow: hidden;
-      animation: fadeUp 0.6s 0.3s ease both;
+    /* TOP BAR */
+    .top-bar {
+      display: flex; gap: 10px; padding: 14px 16px 0;
       position: relative; z-index: 1;
     }
-    .stat {
-      flex: 1; text-align: center; padding: 14px 8px;
-      border-right: 1px solid var(--pi-border);
+    .search-input {
+      flex: 1; background: rgba(30,10,60,0.8);
+      border: 1px solid var(--pi-border); border-radius: 24px;
+      color: var(--text); font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; padding: 10px 18px; outline: none;
     }
-    .stat:last-child { border-right: none; }
-    .stat-val {
-      font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700;
-      color: var(--pi-gold);
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-input:focus { border-color: var(--pi-light); }
+    .country-btn {
+      background: rgba(30,10,60,0.8); border: 1px solid var(--pi-border);
+      border-radius: 24px; color: var(--text); font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; padding: 10px 14px; cursor: pointer; white-space: nowrap;
     }
-    .stat-label { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* ── TABS ── */
-    .tabs {
-      display: flex; gap: 8px;
-      padding: 20px 16px 12px;
-      position: sticky; top: 60px; z-index: 90;
-      background: rgba(17,3,40,0.9);
-      backdrop-filter: blur(12px);
+    /* CATEGORIES */
+    .categories {
+      display: flex; gap: 8px; overflow-x: auto;
+      padding: 12px 16px 0; scrollbar-width: none; position: relative; z-index: 1;
     }
-    .tab {
-      flex: 1; text-align: center;
-      padding: 9px 6px; border-radius: 12px;
-      font-size: 0.82rem; font-weight: 500;
-      border: 1px solid var(--pi-border);
+    .categories::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      white-space: nowrap; padding: 7px 16px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 500; border: 1px solid var(--pi-border);
       background: transparent; color: var(--text-muted);
-      cursor: pointer; transition: all 0.2s;
+      cursor: pointer; transition: all 0.2s; flex-shrink: 0;
     }
-    .tab.active {
+    .cat-pill.active {
       background: linear-gradient(135deg, var(--pi), var(--pi-light));
       border-color: transparent; color: #fff;
     }
 
-    /* ── SEARCH ── */
-    .search-wrap {
-      padding: 0 16px 12px;
-      position: relative; z-index: 1;
+    /* HERO BANNER */
+    .hero-banner {
+      margin: 16px 16px 0;
+      background: linear-gradient(135deg, rgba(107,33,214,0.4), rgba(245,158,11,0.15));
+      border: 1px solid rgba(155,92,246,0.25);
+      border-radius: 20px; padding: 24px 20px;
+      position: relative; z-index: 1; overflow: hidden;
     }
-    .search-wrap input {
-      width: 100%; background: var(--pi-card);
-      border: 1px solid var(--pi-border); border-radius: 12px;
-      color: var(--text); font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem; padding: 10px 16px;
-      outline: none; transition: border-color 0.2s;
+    .hero-banner h2 {
+      font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
+      line-height: 1.3; margin-bottom: 8px;
     }
-    .search-wrap input::placeholder { color: var(--text-muted); }
-    .search-wrap input:focus { border-color: var(--pi-light); }
+    .hero-banner p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
 
-    /* ── CATEGORY PILLS ── */
-    .categories {
-      display: flex; gap: 8px; overflow-x: auto;
-      padding: 0 16px 16px; scrollbar-width: none;
-      position: relative; z-index: 1;
+    /* SECTION HEADER */
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 16px 10px; position: relative; z-index: 1;
     }
-    .categories::-webkit-scrollbar { display: none; }
-    .cat-pill {
-      white-space: nowrap; padding: 6px 14px;
-      border-radius: 20px; font-size: 0.78rem; font-weight: 500;
-      border: 1px solid var(--pi-border);
-      background: var(--pi-card); color: var(--text-muted);
-      cursor: pointer; transition: all 0.2s; flex-shrink: 0;
-    }
-    .cat-pill.active, .cat-pill:hover {
-      background: rgba(107,33,214,0.35);
-      border-color: var(--pi-light); color: var(--text);
+    .section-header h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+    .refresh-btn {
+      color: var(--pi-light); font-size: 0.8rem; cursor: pointer;
+      background: none; border: none; font-family: 'DM Sans', sans-serif;
     }
 
-    /* ── GRID ── */
+    /* GRID */
     .grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 12px; padding: 0 16px 100px;
-      position: relative; z-index: 1;
+      gap: 12px; padding: 0 16px 100px; position: relative; z-index: 1;
     }
 
-    /* ── CARD ── */
+    /* CARD */
     .card {
-      background: var(--pi-card);
-      border: 1px solid var(--pi-border);
-      border-radius: 16px; overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      background: var(--pi-card); border: 1px solid var(--pi-border);
+      border-radius: 16px; overflow: hidden; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
       animation: fadeUp 0.5s ease both;
     }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(107,33,214,0.25);
-      border-color: rgba(155,92,246,0.4);
-    }
+    .card:active { transform: scale(0.97); }
     .card-img {
       width: 100%; aspect-ratio: 1;
-      object-fit: cover;
-      background: linear-gradient(135deg, #2a0f4a, #1a0533);
-      font-size: 2.5rem;
-      display: flex;
-      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1e0a3c, #2a0f4a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; position: relative; overflow: hidden;
+    }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .card-badge {
+      position: absolute; top: 8px; left: 8px; z-index: 2;
+      background: rgba(17,3,40,0.75); backdrop-filter: blur(6px);
+      border-radius: 20px; padding: 3px 8px;
+      font-size: 0.65rem; font-weight: 600; color: var(--text-muted);
     }
     .card-body { padding: 10px 12px 12px; }
     .card-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem; font-weight: 700;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;
     }
-    .card-seller { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
-    .card-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 8px;
+    .card-seller {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.72rem; color: var(--success); margin-bottom: 8px;
     }
-    .price {
-      font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700;
-      color: var(--pi-gold);
+    .seller-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+    .card-footer { display: flex; align-items: flex-end; justify-content: space-between; }
+    .price { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--pi-gold); }
+    .ship-info { font-size: 0.65rem; color: var(--text-muted); margin-top: 1px; }
+    .add-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(107,33,214,0.3); border: 1px solid rgba(155,92,246,0.3);
+      color: var(--pi-light); font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
     }
-    .price span { font-size: 0.7rem; font-weight: 400; color: var(--text-muted); }
-    .buy-btn {
-      background: linear-gradient(135deg, var(--pi), var(--pi-light));
-      border: none; border-radius: 8px;
-      color: #fff; font-size: 0.72rem; font-weight: 600;
-      padding: 5px 10px; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .buy-btn:hover { opacity: 0.85; }
 
-    /* ── SELL TAB ── */
-    #sellView { display: none; padding: 16px; position: relative; z-index: 1; }
+    /* VIEWS */
     #browseView { display: block; }
-    #myView { display: none; padding: 16px; position: relative; z-index: 1; }
+    #sellView, #ordersView, #profileView, #adminView {
+      display: none; padding: 16px; position: relative; z-index: 1;
+    }
 
-    .sell-form {
-      background: var(--pi-card);
-      border: 1px solid var(--pi-border);
-      border-radius: 20px; padding: 20px;
+    /* PANEL */
+    .panel {
+      background: var(--pi-card); border: 1px solid var(--pi-border);
+      border-radius: 20px; padding: 20px; margin-bottom: 16px;
     }
-    .sell-form h2 {
-      font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
-      margin-bottom: 20px;
+    .panel-title {
+      font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 16px;
     }
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block; font-size: 0.78rem; color: var(--text-muted);
-      margin-bottom: 6px; font-weight: 500;
-    }
+
+    /* FORMS */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.76rem; color: var(--text-muted); margin-bottom: 5px; font-weight: 500; }
     .form-group input,
     .form-group textarea,
     .form-group select {
       width: 100%; background: var(--pi-surface);
       border: 1px solid var(--pi-border); border-radius: 10px;
       color: var(--text); font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem; padding: 10px 14px; outline: none;
+      font-size: 0.88rem; padding: 10px 13px; outline: none;
       transition: border-color 0.2s;
     }
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus { border-color: var(--pi-light); }
-    .form-group textarea { resize: none; height: 80px; }
+    .form-group textarea { resize: none; height: 76px; }
     .form-group select option { background: var(--pi-card); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-    .submit-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--pi), var(--pi-light));
-      border: none; border-radius: 12px;
-      color: #fff; font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      padding: 14px; cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
+    /* BUTTONS */
+    .btn {
+      border: none; border-radius: 12px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      transition: opacity 0.2s;
     }
-    .submit-btn:active { transform: scale(0.98); }
-    .submit-btn:hover { opacity: 0.9; }
+    .btn-primary { width: 100%; background: linear-gradient(135deg, var(--pi), var(--pi-light)); color: #fff; font-size: 0.95rem; padding: 13px; }
+    .btn-gold { width: 100%; background: linear-gradient(135deg, var(--pi-gold), #f97316); color: #1a0533; font-size: 0.95rem; padding: 13px; }
+    .btn-outline { width: 100%; background: transparent; border: 1px solid var(--pi-border); color: var(--text-muted); font-size: 0.9rem; padding: 12px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+    .btn-sm { padding: 7px 14px !important; font-size: 0.78rem !important; width: auto !important; border-radius: 8px !important; }
+    .btn-danger { background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; }
+    .btn:hover { opacity: 0.9; }
 
-    /* ── BOTTOM NAV ── */
-    .bottom-nav {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(17,3,40,0.95);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid var(--pi-border);
-      display: flex;
-      padding: 8px 0 env(safe-area-inset-bottom);
-    }
-    .nav-item {
-      flex: 1; text-align: center; padding: 6px 4px;
-      cursor: pointer; transition: color 0.2s;
-      color: var(--text-muted); font-size: 0.65rem; font-weight: 500;
-    }
-    .nav-item.active { color: var(--pi-light); }
-    .nav-icon { font-size: 1.3rem; display: block; margin-bottom: 2px; }
+    /* STATE BOX */
+    .state-box { text-align: center; padding: 32px 16px; }
+    .state-icon { font-size: 3rem; margin-bottom: 12px; }
+    .state-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .state-desc { font-size: 0.84rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
 
-    /* ── MODAL ── */
+    /* ORDERS */
+    .order-card {
+      background: var(--pi-surface); border: 1px solid var(--pi-border);
+      border-radius: 14px; padding: 14px; margin-bottom: 10px;
+    }
+    .order-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+    .order-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; }
+    .order-meta { font-size: 0.72rem; color: var(--text-muted); }
+    .status-pill {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
+    }
+    .s-unpaid { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
+    .s-paid { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
+    .s-shipped { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+    .s-delivered { background: rgba(107,33,214,0.15); color: var(--pi-light); border: 1px solid rgba(155,92,246,0.25); }
+    .tracking-box {
+      margin-top: 8px; padding: 8px 12px; border-radius: 10px;
+      background: rgba(107,33,214,0.1); border: 1px solid var(--pi-border); font-size: 0.78rem;
+    }
+    .tracking-box strong { color: var(--pi-light); }
+
+    /* ADMIN */
+    .admin-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 16px; }
+    .admin-stat { background: var(--pi-surface); border: 1px solid var(--pi-border); border-radius: 12px; padding: 14px; text-align: center; }
+    .admin-stat-val { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--pi-gold); }
+    .admin-stat-lbl { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
+    .seller-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 12px; background: var(--pi-surface); border: 1px solid var(--pi-border); border-radius: 12px; margin-bottom: 8px; }
+    .seller-name { font-weight: 600; font-size: 0.85rem; }
+    .seller-meta { font-size: 0.7rem; color: var(--text-muted); }
+    .btn-row { display: flex; gap: 6px; }
+    .admin-order { padding: 12px; background: var(--pi-surface); border: 1px solid var(--pi-border); border-radius: 12px; margin-bottom: 8px; }
+    .admin-order-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .admin-order-name { font-weight: 600; font-size: 0.85rem; }
+    .admin-order-meta { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px; }
+    .update-form { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--pi-border); }
+
+    /* MODAL */
     .modal-overlay {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      background: rgba(0,0,0,0.72); backdrop-filter: blur(6px);
       align-items: flex-end; justify-content: center;
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: var(--pi-card);
-      border: 1px solid var(--pi-border);
-      border-radius: 24px 24px 0 0;
-      width: 100%; max-width: 480px;
-      padding: 24px 20px 40px;
-      animation: slideUp 0.3s ease;
+      background: var(--pi-card); border: 1px solid var(--pi-border);
+      border-radius: 24px 24px 0 0; width: 100%; max-width: 480px;
+      padding: 0 20px 40px; animation: slideUp 0.3s ease;
+      max-height: 90vh; overflow-y: auto;
     }
-    .modal-handle {
-      width: 40px; height: 4px; border-radius: 2px;
-      background: var(--pi-border); margin: 0 auto 20px;
+    .modal-handle { width: 40px; height: 4px; border-radius: 2px; background: var(--pi-border); margin: 16px auto 20px; }
+    .modal-hero {
+      width: 100%; height: 180px; border-radius: 16px; margin-bottom: 16px;
+      background: linear-gradient(135deg, #2a0f4a, #1a0533);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; overflow: hidden;
     }
-    .modal-emoji { font-size: 3rem; text-align: center; margin-bottom: 12px; }
-    .modal-title {
-      font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800;
-      text-align: center; margin-bottom: 4px;
-    }
-    .modal-seller { text-align: center; color: var(--text-muted); font-size: 0.82rem; margin-bottom: 16px; }
-    .modal-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
-    .modal-price {
-      font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
-      color: var(--pi-gold); text-align: center; margin-bottom: 20px;
-    }
-    .modal-price span { font-size: 1rem; color: var(--text-muted); }
-    .modal-pay-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--pi-gold), #f97316);
-      border: none; border-radius: 14px;
-      color: #1a0533; font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 800;
-      padding: 16px; cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
-    }
-    .modal-pay-btn:active { transform: scale(0.98); }
-    .modal-close {
-      width: 100%; background: transparent;
-      border: 1px solid var(--pi-border); border-radius: 14px;
-      color: var(--text-muted); font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem; padding: 12px; cursor: pointer;
-      margin-top: 10px;
-    }
+    .modal-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
+    .modal-seller { color: var(--success); font-size: 0.82rem; margin-bottom: 10px; }
+    .modal-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 14px; }
+    .modal-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 18px; }
+    .modal-price { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--pi-gold); }
+    .modal-price-sub { font-size: 0.78rem; color: var(--text-muted); }
+    .ship-form-title { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
 
-    /* ── TOAST ── */
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(17,3,40,0.96); backdrop-filter: blur(16px);
+      border-top: 1px solid var(--pi-border);
+      display: flex; padding: 8px 0 env(safe-area-inset-bottom);
+    }
+    .nav-item { flex: 1; text-align: center; padding: 5px 4px; cursor: pointer; color: var(--text-muted); font-size: 0.63rem; font-weight: 500; }
+    .nav-item.active { color: var(--pi-light); }
+    .nav-icon { font-size: 1.3rem; display: block; margin-bottom: 2px; }
+
+    /* TOAST */
     #toast {
       position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: var(--pi-card); border: 1px solid var(--pi-border);
-      border-radius: 12px; padding: 10px 20px;
-      font-size: 0.85rem; color: var(--text);
-      opacity: 0; transition: all 0.3s; z-index: 300;
-      white-space: nowrap; pointer-events: none;
+      border-radius: 12px; padding: 10px 20px; font-size: 0.85rem; color: var(--text);
+      opacity: 0; transition: all 0.3s; z-index: 400; white-space: nowrap; pointer-events: none;
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── EMPTY STATE ── */
-    .empty {
-      text-align: center; padding: 48px 20px;
-      color: var(--text-muted);
-    }
-    .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-    .empty h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 6px; }
+    /* EMPTY / LOADER */
+    .empty { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .empty-icon { font-size: 3rem; margin-bottom: 10px; }
+    .empty h3 { font-family: 'Syne', sans-serif; font-size: 1rem; color: var(--text); margin-bottom: 6px; }
+    .loader { text-align: center; padding: 32px; color: var(--text-muted); font-size: 0.85rem; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
   </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
-  <div class="logo">BuyBy<span>Pi</span></div>
-  <button id="authBtn" onclick="loginWithPi()">Connect Pi</button>
-  <div id="userBadge"><span class="dot"></span><span id="userName">Pioneer</span></div>
+  <div class="logo">🛒 BuyByPi</div>
+  <button id="authBtn" onclick="loginWithPi()">🔗 Connect Pi</button>
+  <div id="userBadge">
+    <span class="dot"></span>
+    <span id="userName">Pioneer</span>
+    <span id="verifiedMark" class="verified" style="display:none">✓ Verified</span>
+  </div>
 </header>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">🌐 Pi Network Marketplace</div>
-  <h1>Buy &amp; Sell with <em>Pi Coin</em></h1>
-  <p>The trusted marketplace for Pi Pioneers</p>
-</div>
-
-<!-- STATS -->
-<div class="stats">
-  <div class="stat"><div class="stat-val" id="statItems">24</div><div class="stat-label">Listings</div></div>
-  <div class="stat"><div class="stat-val" id="statSellers">11</div><div class="stat-label">Sellers</div></div>
-  <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Pi Only</div></div>
-</div>
-
-<!-- TABS -->
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('browse', this)">🛍 Browse</button>
-  <button class="tab" onclick="switchTab('sell', this)">➕ Sell</button>
-  <button class="tab" onclick="switchTab('my', this)">👤 Mine</button>
-</div>
 
 <!-- BROWSE VIEW -->
 <div id="browseView">
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="🔍  Search products..." oninput="filterProducts()"/>
+  <div class="top-bar">
+    <input class="search-input" type="text" id="searchInput" placeholder="🔍 Search for products..." oninput="filterProducts()"/>
+    <button class="country-btn">🌍 Global ▾</button>
   </div>
   <div class="categories" id="categories"></div>
-  <div class="grid" id="productGrid"></div>
+  <div class="hero-banner">
+    <h2>Welcome to the<br/>future of Commerce.</h2>
+    <p>Pay instantly with Pi Network. Shop global or local with verified pioneers.</p>
+  </div>
+  <div class="section-header">
+    <h3>Latest Arrivals</h3>
+    <button class="refresh-btn" onclick="loadProducts()">Refresh ↻</button>
+  </div>
+  <div class="grid" id="productGrid">
+    <div class="loader" style="grid-column:1/-1">⏳ Loading...</div>
+  </div>
 </div>
 
 <!-- SELL VIEW -->
 <div id="sellView">
-  <div class="sell-form">
-    <h2>📦 List Your Item</h2>
-    <div class="form-group">
-      <label>Item Name</label>
-      <input type="text" id="itemName" placeholder="e.g. Handmade Bracelet"/>
+  <div id="sellLoginPrompt" style="display:none">
+    <div class="panel"><div class="state-box">
+      <div class="state-icon">🔑</div>
+      <div class="state-title">Connect Pi First</div>
+      <div class="state-desc">Connect your Pi wallet to start selling.</div>
+      <button class="btn btn-primary" style="max-width:200px;margin:0 auto" onclick="loginWithPi()">Connect Pi Wallet</button>
+    </div></div>
+  </div>
+  <div id="sellerApplySection" style="display:none">
+    <div class="panel"><div class="state-box">
+      <div class="state-icon">🏪</div>
+      <div class="state-title">Become a Seller</div>
+      <div class="state-desc">Apply to list products on BuyByPi. Admin reviews applications quickly.</div>
+      <button class="btn btn-primary" style="max-width:200px;margin:0 auto" onclick="applyAsSeller()">Apply to Sell</button>
+    </div></div>
+  </div>
+  <div id="sellerPendingSection" style="display:none">
+    <div class="panel"><div class="state-box">
+      <div class="state-icon">⏳</div>
+      <div class="state-title">Application Pending</div>
+      <div class="state-desc">The admin team is reviewing your seller account. Please check back later.</div>
+    </div></div>
+  </div>
+  <div id="sellFormSection" style="display:none">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div class="panel-title" style="margin-bottom:0">📦 Create New Listing</div>
+        <span style="color:var(--pi-light);font-size:0.78rem;cursor:pointer" onclick="switchTab('profile')">View My Store</span>
+      </div>
+      <div class="form-group"><label>Product Name</label><input type="text" id="itemName" placeholder="e.g. Vintage Leather Watch"/></div>
+      <div class="form-group"><label>Description</label><textarea id="itemDesc" placeholder="Describe the condition, material, what's included..."></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>Price (Pi)</label><input type="number" id="itemPrice" placeholder="e.g. 5.5" min="0.01" step="0.01"/></div>
+        <div class="form-group"><label>Category</label>
+          <select id="itemCat">
+            <option value="">Select...</option>
+            <option>Fashion</option><option>Electronics</option><option>Food</option>
+            <option>Art</option><option>Services</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Shipping Type</label>
+          <select id="itemShipsTo">
+            <option value="Worldwide">Worldwide / Digital</option>
+            <option value="Local">Local Only</option>
+            <option value="Digital">Digital (Instant)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Shipping Cost (Pi)</label><input type="number" id="itemShipping" placeholder="0" min="0" step="0.01" value="0"/></div>
+      </div>
+      <div class="form-group"><label>Image URL (optional)</label><input type="url" id="itemImageUrl" placeholder="https://... paste image link"/></div>
+      <div class="form-group"><label>Thumbnail Emoji (fallback)</label><input type="text" id="itemEmoji" placeholder="e.g. 🕐" maxlength="2"/></div>
+      <button class="btn btn-primary" onclick="listItem()">🚀 Publish Item to Marketplace</button>
     </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea id="itemDesc" placeholder="Describe your item..."></textarea>
-    </div>
-    <div class="form-group">
-      <label>Category</label>
-      <select id="itemCat">
-        <option value="All">Select category</option>
-        <option>Fashion</option>
-        <option>Electronics</option>
-        <option>Food</option>
-        <option>Art</option>
-        <option>Services</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Price (Pi)</label>
-      <input type="number" id="itemPrice" placeholder="e.g. 5" min="0.1" step="0.1"/>
-    </div>
-    <div class="form-group">
-      <label>Emoji Icon</label>
-      <input type="text" id="itemEmoji" placeholder="e.g. 👜" maxlength="2"/>
-    </div>
-    <button class="submit-btn" onclick="listItem()">🚀 List for Sale</button>
   </div>
 </div>
 
-<!-- MY LISTINGS VIEW -->
-<div id="myView">
-  <div id="myListings"></div>
+<!-- ORDERS VIEW -->
+<div id="ordersView">
+  <div class="panel">
+    <div class="panel-title">📦 My Orders</div>
+    <div id="ordersList"><div class="loader">Loading...</div></div>
+  </div>
+</div>
+
+<!-- PROFILE VIEW -->
+<div id="profileView">
+  <div id="profileContent"></div>
+</div>
+
+<!-- ADMIN VIEW -->
+<div id="adminView">
+  <div id="adminLoginPrompt">
+    <div class="panel">
+      <div class="panel-title">🔐 Admin Login</div>
+      <div class="form-group"><label>Admin Password</label><input type="password" id="adminPassInput" placeholder="Enter admin password"/></div>
+      <button class="btn btn-primary" onclick="adminLogin()">Login as Admin</button>
+    </div>
+  </div>
+  <div id="adminDashboard" style="display:none">
+    <div class="admin-grid" id="adminStats"></div>
+    <div class="panel">
+      <div class="panel-title">⏳ Pending Sellers</div>
+      <div id="pendingSellersList"><div class="loader">Loading...</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">📋 All Orders</div>
+      <div id="adminOrdersList"><div class="loader">Loading...</div></div>
+    </div>
+  </div>
 </div>
 
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="productModal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-emoji" id="mEmoji"></div>
+    <div class="modal-hero" id="mHero"></div>
     <div class="modal-title" id="mTitle"></div>
     <div class="modal-seller" id="mSeller"></div>
     <div class="modal-desc" id="mDesc"></div>
-    <div class="modal-price" id="mPrice"></div>
-    <button class="modal-pay-btn" id="mPayBtn" onclick="payWithPi()">⚡ Pay with Pi</button>
-    <button class="modal-close" onclick="closeModal()">Close</button>
+    <div class="modal-price-row">
+      <div class="modal-price" id="mPrice"></div>
+      <div class="modal-price-sub" id="mPriceSub"></div>
+    </div>
+    <div id="shippingSection">
+      <div class="ship-form-title">📍 Delivery Address</div>
+      <div class="form-group"><input type="text" id="shipName" placeholder="Full Name"/></div>
+      <div class="form-group"><input type="text" id="shipStreet" placeholder="Street Address"/></div>
+      <div class="form-row">
+        <div class="form-group"><input type="text" id="shipCity" placeholder="City"/></div>
+        <div class="form-group"><input type="text" id="shipCountry" placeholder="Country"/></div>
+      </div>
+      <div class="form-group"><input type="tel" id="shipPhone" placeholder="Phone (optional)"/></div>
+    </div>
+    <button class="btn btn-gold" onclick="payWithPi()">⚡ Pay with Pi</button>
+    <button class="btn btn-outline" style="margin-top:10px;border-radius:14px" onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <!-- TOAST -->
 <div id="toast"></div>
 
-<script>
-  // ── Pi SDK Init ──
-  let currentUser = null;
-  let selectedProduct = null;
-  let piReady = false;
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="nav-item active" id="nav-browse" onclick="switchTab('browse')"><span class="nav-icon">🏠</span>Home</div>
+  <div class="nav-item" id="nav-sell" onclick="switchTab('sell')"><span class="nav-icon">➕</span>Sell</div>
+  <div class="nav-item" id="nav-orders" onclick="switchTab('orders')"><span class="nav-icon">📦</span>Orders</div>
+  <div class="nav-item" id="nav-profile" onclick="switchTab('profile')"><span class="nav-icon">👤</span>Profile</div>
+  <div class="nav-item" id="nav-admin" onclick="switchTab('admin')"><span class="nav-icon">🔐</span>Admin</div>
+</div>
 
+<script>
+  const BACKEND = 'https://buybypi-backend-2.onrender.com';
+  const ADMIN_KEY = 'buybypi_admin_2024';
+  const CATS = ['All','Fashion','Electronics','Food','Art','Services','Other'];
+  const CAT_ICONS = {All:'🛍',Fashion:'👕',Electronics:'📱',Food:'🍎',Art:'🎨',Services:'⚡',Other:'📦'};
+
+  let currentUser = null, currentUserData = null, selectedProduct = null;
+  let piReady = false, allProducts = [], activeCategory = 'All';
+
+  // ── PI SDK ──
   function initPiSDK() {
-    if (typeof Pi === 'undefined') {
-      console.log('Pi SDK not available - retrying...');
-      setTimeout(initPiSDK, 500);
-      return;
-    }
+    if (typeof Pi === 'undefined') { setTimeout(initPiSDK, 500); return; }
     try {
-      Pi.init({ version: "2.0", sandbox: false });
+      Pi.init({ version: "2.0", sandbox: true });
       piReady = true;
-      console.log('Pi SDK initialized ✅');
-      document.getElementById('authBtn').textContent = 'Connect Pi';
-      // Auto-authenticate if already logged in
-      Pi.authenticate(['username', 'payments'], onIncompletePaymentFound)
-        .then(auth => {
-          if (auth && auth.user) {
-            currentUser = auth.user;
-            showUserBadge(auth.user.username);
-            showToast('👋 Welcome back, ' + auth.user.username + '!');
-          }
-        })
-        .catch(() => {
-          // Not logged in yet, that's fine
-          console.log('No existing Pi session');
-        });
+      Pi.authenticate(['username','payments'], onIncompletePaymentFound)
+        .then(auth => { if (auth && auth.user) handleAuth(auth.user); }).catch(() => {});
+    } catch(e) { console.error(e); }
+  }
+  window.addEventListener('load', () => setTimeout(initPiSDK, 300));
+
+  async function handleAuth(piUser) {
+    currentUser = piUser;
+    try {
+      const res = await fetch(`${BACKEND}/users/auth`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ username: piUser.username })
+      });
+      const data = await res.json();
+      if (data.success) { currentUserData = data.user; updateBadge(); updateSellView(); }
+    } catch(e) { console.error(e); }
+  }
+
+  function updateBadge() {
+    if (!currentUser) return;
+    document.getElementById('authBtn').style.display = 'none';
+    document.getElementById('userBadge').style.display = 'flex';
+    document.getElementById('userName').textContent = currentUser.username;
+    document.getElementById('verifiedMark').style.display =
+      currentUserData && currentUserData.isVerifiedSeller ? 'inline' : 'none';
+  }
+
+  function loginWithPi() {
+    if (!piReady) { showToast('⚠️ Open in Pi Browser'); return; }
+    showToast('🔄 Connecting...');
+    Pi.authenticate(['username','payments'], onIncompletePaymentFound)
+      .then(auth => { handleAuth(auth.user); showToast('👋 Welcome, ' + auth.user.username + '!'); })
+      .catch(() => showToast('⚠️ Use Pi Browser to connect'));
+  }
+
+  function onIncompletePaymentFound(p) { console.log('Incomplete payment:', p); }
+
+  // ── PRODUCTS ──
+  async function loadProducts() {
+    document.getElementById('productGrid').innerHTML = '<div class="loader" style="grid-column:1/-1">⏳ Loading...</div>';
+    try {
+      const res = await fetch(`${BACKEND}/products`);
+      const data = await res.json();
+      if (data.success) { allProducts = data.products; renderProducts(); }
     } catch(e) {
-      console.error('Pi SDK init error:', e);
+      document.getElementById('productGrid').innerHTML =
+        '<div class="empty" style="grid-column:1/-1"><div class="empty-icon">📭</div><h3>No Items Found</h3><p>Be the first to list something!</p></div>';
     }
   }
 
-  // Wait for SDK to load
-  window.addEventListener('load', () => {
-    setTimeout(initPiSDK, 300);
-  });
-
-  // ── Sample Products ──
-  const sampleProducts = [
-    { id: 1, name: "Handmade Bracelet", price: 0.01, emoji: "📿", cat: "Fashion", seller: "pioneer_ada", desc: "Beautiful handmade bracelet crafted from natural beads. Perfect gift for loved ones." },
-    { id: 2, name: "Logo Design", price: 15, emoji: "🎨", cat: "Services", seller: "design_pi", desc: "Professional logo design with 3 revisions. Delivered within 48 hours." },
-    { id: 3, name: "Homemade Cookies", price: 8, emoji: "🍪", cat: "Food", seller: "bakery_pi", desc: "Fresh batch of 12 chocolate chip cookies baked with love. Local delivery only." },
-    { id: 4, name: "Vintage Watch", price: 40, emoji: "⌚", cat: "Fashion", seller: "vintage_hub", desc: "Classic 1980s vintage watch. Working condition, minor scratches on back." },
-    { id: 5, name: "Digital Art Print", price: 10, emoji: "🖼️", cat: "Art", seller: "artby_pi", desc: "High resolution digital art print (3000x3000px). Delivered via email." },
-    { id: 6, name: "Phone Repair", price: 20, emoji: "📱", cat: "Services", seller: "fixitpi", desc: "Screen replacement and battery repair for most smartphone models." },
-    { id: 7, name: "Fresh Mango Box", price: 12, emoji: "🥭", cat: "Food", seller: "fruits_pi", desc: "1kg box of fresh Alphonso mangoes. Seasonal. Local pickup or delivery." },
-    { id: 8, name: "Wireless Earbuds", price: 35, emoji: "🎧", cat: "Electronics", seller: "techzone_pi", desc: "Bluetooth 5.0 earbuds with 20hr battery. Brand new, sealed box." },
-  ];
-
-  let products = [...sampleProducts];
-  let myItems = [];
-  let activeCategory = "All";
-  const categories = ["All", "Fashion", "Electronics", "Food", "Art", "Services", "Other"];
-
-  // ── Render Categories ──
   function renderCategories() {
-    const el = document.getElementById('categories');
-    el.innerHTML = categories.map(c =>
-      `<button class="cat-pill${c === activeCategory ? ' active' : ''}" onclick="setCategory('${c}')">${c}</button>`
+    document.getElementById('categories').innerHTML = CATS.map(c =>
+      `<button class="cat-pill${c===activeCategory?' active':''}" onclick="setCategory('${c}')">${CAT_ICONS[c]} ${c==='All'?'All Items':c}</button>`
     ).join('');
   }
 
-  function setCategory(cat) {
-    activeCategory = cat;
-    renderCategories();
-    renderProducts();
-  }
+  function setCategory(cat) { activeCategory = cat; renderCategories(); renderProducts(); }
 
-  // ── Render Products ──
-  function renderProducts(list) {
-    const search = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = (list || products).filter(p => {
-      const matchCat = activeCategory === 'All' || p.cat === activeCategory;
-      const matchSearch = !search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search);
+  function renderProducts() {
+    const search = (document.getElementById('searchInput').value||'').toLowerCase();
+    const filtered = allProducts.filter(p => {
+      const matchCat = activeCategory==='All' || p.cat===activeCategory;
+      const matchSearch = !search || p.name.toLowerCase().includes(search) || (p.desc||'').toLowerCase().includes(search);
       return matchCat && matchSearch;
     });
-
     const grid = document.getElementById('productGrid');
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
-        <div class="empty-icon">🔍</div>
-        <h3>No items found</h3>
-        <p>Try a different search or category</p>
-      </div>`;
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🔍</div><h3>No Items Found</h3><p>Try a different search</p></div>';
       return;
     }
-
-    grid.innerHTML = filtered.map((p, i) => `
-      <div class="card" style="animation-delay:${i * 0.05}s" onclick="openModal(${p.id})">
-        <div class="card-img" style="font-size:2.5rem;display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:linear-gradient(135deg,#2a0f4a,#1a0533)">${p.emoji}</div>
-        <div class="card-body">
-          <div class="card-title">${p.name}</div>
-          <div class="card-seller">by ${p.seller}</div>
-          <div class="card-footer">
-            <div class="price">${p.price} <span>π</span></div>
-            <button class="buy-btn" onclick="event.stopPropagation();openModal(${p.id})">Buy</button>
+    grid.innerHTML = filtered.map((p,i) => {
+      const badge = p.shipsTo==='Digital'?'⚡ Digital':p.shipsTo==='Local'?'📍 Local':'🌍 Global';
+      const ship = p.shippingCost>0?`+${p.shippingCost}π ship`:'Free ship';
+      const imgHtml = p.imageUrl
+        ? `<img src="${p.imageUrl}" onerror="this.style.display='none'" /><span style="position:relative;z-index:1">${p.emoji||'📦'}</span>`
+        : `<span>${p.emoji||'📦'}</span>`;
+      return `
+        <div class="card" style="animation-delay:${i*0.05}s" onclick="openModal('${p._id}')">
+          <div class="card-img">
+            <div class="card-badge">${badge}</div>
+            ${imgHtml}
           </div>
-        </div>
-      </div>
-    `).join('');
-
-    document.getElementById('statItems').textContent = products.length;
-    document.getElementById('statSellers').textContent = new Set(products.map(p => p.seller)).size;
+          <div class="card-body">
+            <div class="card-title">${p.name}</div>
+            <div class="card-seller"><span class="seller-dot"></span>${p.seller}</div>
+            <div class="card-footer">
+              <div><div class="price">${p.price}π</div><div class="ship-info">${ship}</div></div>
+              <button class="add-btn" onclick="event.stopPropagation();openModal('${p._id}')">+</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
   }
 
   function filterProducts() { renderProducts(); }
 
-  // ── Modal ──
+  // ── MODAL ──
   function openModal(id) {
-    const p = products.find(x => x.id === id);
+    const p = allProducts.find(x => x._id===id);
     if (!p) return;
     selectedProduct = p;
-    document.getElementById('mEmoji').textContent = p.emoji;
+    const hero = document.getElementById('mHero');
+    hero.innerHTML = p.imageUrl
+      ? `<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover" onerror="this.parentNode.innerHTML='<span style=font-size:4rem>${p.emoji||'📦'}</span>'"/>`
+      : `<span style="font-size:4rem">${p.emoji||'📦'}</span>`;
     document.getElementById('mTitle').textContent = p.name;
-    document.getElementById('mSeller').textContent = `Sold by ${p.seller}`;
+    document.getElementById('mSeller').textContent = `● Sold by ${p.seller} · ${p.shipsTo||'Worldwide'}`;
     document.getElementById('mDesc').textContent = p.desc;
-    document.getElementById('mPrice').innerHTML = `${p.price} <span>π Pi</span>`;
+    document.getElementById('mPrice').textContent = `${p.price}π`;
+    document.getElementById('mPriceSub').textContent = p.shippingCost>0?`+ ${p.shippingCost}π shipping`:'Free shipping';
+    document.getElementById('shippingSection').style.display = p.shipsTo==='Digital'?'none':'block';
     document.getElementById('productModal').classList.add('open');
   }
 
-  function closeModal() {
-    document.getElementById('productModal').classList.remove('open');
-    selectedProduct = null;
-  }
+  function closeModal() { document.getElementById('productModal').classList.remove('open'); selectedProduct=null; }
+  document.getElementById('productModal').addEventListener('click', e => { if (e.target.id==='productModal') closeModal(); });
 
-  document.getElementById('productModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-
-  // ── Pi Payment ──
-  function payWithPi() {
+  // ── PAYMENT ──
+  async function payWithPi() {
     if (!selectedProduct) return;
-    if (typeof Pi === 'undefined' || !piReady) {
-      showToast('⚠️ Open in Pi Browser to pay');
-      return;
-    }
-    if (!currentUser) {
-      showToast('👤 Connect Pi wallet first');
-      loginWithPi();
-      return;
-    }
-
-    const paymentData = {
-      amount: selectedProduct.price,
-      memo: `BuyByPi: ${selectedProduct.name}`,
-      metadata: { productId: selectedProduct.id, seller: selectedProduct.seller }
-    };
-
-    const BACKEND = 'https://buybypi-backend-1.onrender.com';
-
-    const callbacks = {
+    if (!piReady) { showToast('⚠️ Open in Pi Browser'); return; }
+    if (!currentUser) { showToast('👤 Connect Pi first'); loginWithPi(); return; }
+    const shippingAddress = selectedProduct.shipsTo!=='Digital' ? {
+      fullName: document.getElementById('shipName').value,
+      street: document.getElementById('shipStreet').value,
+      city: document.getElementById('shipCity').value,
+      country: document.getElementById('shipCountry').value,
+      phone: document.getElementById('shipPhone').value
+    } : {};
+    const total = selectedProduct.price + (selectedProduct.shippingCost||0);
+    Pi.createPayment({
+      amount: total,
+      memo: `BuyByPi Order: ${selectedProduct.name}`,
+      metadata: { productId: selectedProduct._id, seller: selectedProduct.seller }
+    }, {
       onReadyForServerApproval: async (paymentId) => {
-        console.log("Approving payment:", paymentId);
-        showToast('🔄 Processing payment...');
+        showToast('🔄 Processing...');
         try {
-          const res = await fetch(`${BACKEND}/approve`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ paymentId })
+          await fetch(`${BACKEND}/approve`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ paymentId, productId: selectedProduct._id, buyerUsername: currentUser.username, shippingAddress })
           });
-          const data = await res.json();
-          if (data.success) {
-            showToast('✅ Payment approved!');
-          } else {
-            showToast('⚠️ Approval failed');
-          }
-        } catch(e) {
-          console.error('Approval error:', e);
-          showToast('⚠️ Server error during approval');
-        }
+        } catch(e) { console.error(e); }
       },
       onReadyForServerCompletion: async (paymentId, txid) => {
-        console.log("Completing payment:", paymentId, txid);
         try {
           const res = await fetch(`${BACKEND}/complete`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method:'POST', headers:{'Content-Type':'application/json'},
             body: JSON.stringify({ paymentId, txid })
           });
           const data = await res.json();
-          if (data.success) {
-            showToast('🎉 Payment complete! Thank you!');
-            closeModal();
-          } else {
-            showToast('⚠️ Completion failed');
-          }
-        } catch(e) {
-          console.error('Completion error:', e);
-          showToast('⚠️ Server error during completion');
-        }
+          if (data.success) { showToast('🎉 Order placed! Thank you!'); closeModal(); }
+        } catch(e) { console.error(e); }
       },
-      onCancel: (paymentId) => {
-        showToast('❌ Payment cancelled');
-      },
-      onError: (error, payment) => {
-        showToast('⚠️ Payment error: ' + error.message);
-        console.error(error);
-      }
-    };
-
-    Pi.createPayment(paymentData, callbacks);
+      onCancel: () => showToast('❌ Payment cancelled'),
+      onError: (e) => { showToast('⚠️ Payment error'); console.error(e); }
+    });
   }
 
-  // ── Pi Auth ──
-  function loginWithPi() {
-    if (typeof Pi === 'undefined' || !piReady) {
-      showToast('⚠️ Open this app in Pi Browser');
-      return;
-    }
-    showToast('🔄 Connecting to Pi...');
-    Pi.authenticate(['username', 'payments'], onIncompletePaymentFound)
-      .then(auth => {
-        currentUser = auth.user;
-        showUserBadge(auth.user.username);
-        showToast('👋 Welcome, ' + auth.user.username + '!');
-      })
-      .catch(err => {
-        console.error('Auth error:', err);
-        showToast('⚠️ Auth failed - are you in Pi Browser?');
+  // ── SELL ──
+  function updateSellView() {
+    ['sellLoginPrompt','sellerApplySection','sellerPendingSection','sellFormSection']
+      .forEach(id => document.getElementById(id).style.display='none');
+    if (!currentUser) { document.getElementById('sellLoginPrompt').style.display='block'; return; }
+    if (!currentUserData) return;
+    if (currentUserData.isVerifiedSeller) document.getElementById('sellFormSection').style.display='block';
+    else if (currentUserData.sellerApplicationStatus==='pending') document.getElementById('sellerPendingSection').style.display='block';
+    else document.getElementById('sellerApplySection').style.display='block';
+  }
+
+  async function applyAsSeller() {
+    if (!currentUser) return;
+    try {
+      const res = await fetch(`${BACKEND}/users/apply-seller`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ username: currentUser.username })
       });
+      const data = await res.json();
+      if (data.success) { currentUserData=data.user; updateSellView(); showToast('✅ Application submitted!'); }
+    } catch(e) { showToast('⚠️ Error'); }
   }
 
-  function showUserBadge(username) {
-    document.getElementById('authBtn').style.display = 'none';
-    const badge = document.getElementById('userBadge');
-    badge.style.display = 'flex';
-    document.getElementById('userName').textContent = username;
+  async function listItem() {
+    const name=document.getElementById('itemName').value.trim();
+    const desc=document.getElementById('itemDesc').value.trim();
+    const cat=document.getElementById('itemCat').value;
+    const price=parseFloat(document.getElementById('itemPrice').value);
+    const emoji=document.getElementById('itemEmoji').value.trim()||'📦';
+    const imageUrl=document.getElementById('itemImageUrl').value.trim();
+    const shipsTo=document.getElementById('itemShipsTo').value;
+    const shippingCost=parseFloat(document.getElementById('itemShipping').value)||0;
+    if (!name||!desc||!price||!cat) { showToast('⚠️ Fill all required fields'); return; }
+    try {
+      const res = await fetch(`${BACKEND}/products`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ username:currentUser.username, name, desc, price, emoji, imageUrl, cat, shipsTo, shippingCost })
+      });
+      const data = await res.json();
+      if (data.success) {
+        showToast('🎉 Listed successfully!');
+        ['itemName','itemDesc','itemPrice','itemEmoji','itemImageUrl'].forEach(id=>document.getElementById(id).value='');
+        document.getElementById('itemShipping').value='0';
+        await loadProducts(); switchTab('browse');
+      } else { showToast('⚠️ '+(data.error||'Error')); }
+    } catch(e) { showToast('⚠️ Server error'); }
   }
 
-  function onIncompletePaymentFound(payment) {
-    console.log('Incomplete payment found:', payment);
-  }
-
-  // ── Sell / List Item ──
-  function listItem() {
-    const name = document.getElementById('itemName').value.trim();
-    const desc = document.getElementById('itemDesc').value.trim();
-    const cat = document.getElementById('itemCat').value;
-    const price = parseFloat(document.getElementById('itemPrice').value);
-    const emoji = document.getElementById('itemEmoji').value.trim() || '📦';
-
-    if (!name || !desc || !price || cat === 'All') {
-      showToast('⚠️ Please fill all fields');
-      return;
-    }
-    if (price <= 0) {
-      showToast('⚠️ Price must be greater than 0');
-      return;
-    }
-
-    const item = {
-      id: Date.now(),
-      name, desc, cat, price, emoji,
-      seller: currentUser ? currentUser.username : 'you'
-    };
-
-    products.unshift(item);
-    myItems.unshift(item);
-
-    // Clear form
-    document.getElementById('itemName').value = '';
-    document.getElementById('itemDesc').value = '';
-    document.getElementById('itemPrice').value = '';
-    document.getElementById('itemEmoji').value = '';
-
-    showToast('🎉 Item listed successfully!');
-    switchTab('browse', document.querySelector('.tab'));
-    renderProducts();
-  }
-
-  // ── My Listings ──
-  function renderMyListings() {
-    const el = document.getElementById('myListings');
-    if (!currentUser && myItems.length === 0) {
-      el.innerHTML = `<div class="empty">
-        <div class="empty-icon">👤</div>
-        <h3>Not connected</h3>
-        <p>Connect your Pi wallet to see your listings</p>
-        <br/>
-        <button class="submit-btn" style="max-width:200px;margin:0 auto" onclick="loginWithPi()">Connect Pi</button>
-      </div>`;
-      return;
-    }
-    if (myItems.length === 0) {
-      el.innerHTML = `<div class="empty">
-        <div class="empty-icon">📦</div>
-        <h3>No listings yet</h3>
-        <p>Go to the Sell tab to list your first item</p>
-      </div>`;
-      return;
-    }
-    el.innerHTML = `<h3 style="font-family:'Syne',sans-serif;margin-bottom:12px">Your Listings (${myItems.length})</h3>` +
-      myItems.map(p => `
-        <div class="card" style="display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:10px" onclick="openModal(${p.id})">
-          <div style="font-size:2rem">${p.emoji}</div>
-          <div style="flex:1">
-            <div class="card-title">${p.name}</div>
-            <div class="card-seller">${p.cat}</div>
+  // ── ORDERS ──
+  async function loadOrders() {
+    const el=document.getElementById('ordersList');
+    if (!currentUser) { el.innerHTML='<div class="empty"><div class="empty-icon">🔑</div><h3>Connect Pi to see orders</h3></div>'; return; }
+    el.innerHTML='<div class="loader">Loading...</div>';
+    try {
+      const res=await fetch(`${BACKEND}/orders/buyer/${currentUser.username}`);
+      const data=await res.json();
+      if (!data.orders||!data.orders.length) {
+        el.innerHTML='<div class="empty"><div class="empty-icon">📭</div><h3>No orders yet</h3><p>Your purchases will appear here</p></div>'; return;
+      }
+      el.innerHTML=data.orders.map(o=>{
+        const date=new Date(o.createdAt).toLocaleDateString();
+        const track=(o.trackingNumber||o.statusNote)?`
+          <div class="tracking-box">
+            ${o.trackingNumber?`<div><strong>Tracking:</strong> ${o.trackingNumber}</div>`:''}
+            ${o.statusNote?`<div><strong>Note:</strong> ${o.statusNote}</div>`:''}
+          </div>`:'';
+        return `<div class="order-card">
+          <div class="order-top">
+            <div><div class="order-name">${o.productName||'Product'}</div><div class="order-meta">${date} · ${o.amount}π · Seller: ${o.sellerUsername}</div></div>
+            <span class="status-pill s-${o.status}">${o.status}</span>
           </div>
-          <div class="price">${p.price}π</div>
-        </div>
-      `).join('');
+          ${o.shippingAddress&&o.shippingAddress.city?`<div class="order-meta" style="margin-top:4px">📍 ${o.shippingAddress.city}, ${o.shippingAddress.country}</div>`:''}
+          ${track}
+        </div>`;
+      }).join('');
+    } catch(e) { el.innerHTML='<div class="empty"><div class="empty-icon">⚠️</div><h3>Error loading orders</h3></div>'; }
   }
 
-  // ── Tabs ──
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    document.getElementById('browseView').style.display = 'none';
-    document.getElementById('sellView').style.display = 'none';
-    document.getElementById('myView').style.display = 'none';
-    if (tab === 'browse') {
-      document.getElementById('browseView').style.display = 'block';
-      renderProducts();
-    } else if (tab === 'sell') {
-      document.getElementById('sellView').style.display = 'block';
-    } else {
-      document.getElementById('myView').style.display = 'block';
-      renderMyListings();
+  // ── PROFILE ──
+  async function loadProfile() {
+    const el=document.getElementById('profileContent');
+    if (!currentUser||!currentUserData) {
+      el.innerHTML='<div class="panel"><div class="state-box"><div class="state-icon">👤</div><div class="state-title">Connect Pi to view profile</div><button class="btn btn-primary" style="max-width:180px;margin:0 auto" onclick="loginWithPi()">Connect Pi</button></div></div>';
+      return;
     }
+    try {
+      const [oRes,pRes]=await Promise.all([
+        fetch(`${BACKEND}/orders/seller/${currentUser.username}`),
+        fetch(`${BACKEND}/products`)
+      ]);
+      const oData=await oRes.json(); const pData=await pRes.json();
+      const myP=(pData.products||[]).filter(p=>p.seller===currentUser.username);
+      const sales=(oData.orders||[]).filter(o=>o.status!=='unpaid').length;
+      el.innerHTML=`
+        <div class="panel">
+          <div style="text-align:center;margin-bottom:16px">
+            <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--pi),var(--pi-light));display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 10px">👤</div>
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700">${currentUser.username}</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">
+              ${currentUserData.isVerifiedSeller?'✅ Verified Seller':currentUserData.sellerApplicationStatus==='pending'?'⏳ Pending Approval':'👤 Buyer Account'}
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="admin-stat"><div class="admin-stat-val">${myP.length}</div><div class="admin-stat-lbl">Listings</div></div>
+            <div class="admin-stat"><div class="admin-stat-val">${sales}</div><div class="admin-stat-lbl">Sales</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">My Listings (${myP.length})</div>
+          ${!myP.length?'<div class="empty"><div class="empty-icon">📦</div><h3>No listings yet</h3><p>Go to Sell tab to list your first item</p></div>':
+            myP.map(p=>`
+              <div style="display:flex;align-items:center;gap:12px;padding:10px;background:var(--pi-surface);border:1px solid var(--pi-border);border-radius:12px;margin-bottom:8px;cursor:pointer" onclick="openModal('${p._id}')">
+                <div style="font-size:1.8rem">${p.emoji||'📦'}</div>
+                <div style="flex:1"><div style="font-weight:600;font-size:0.88rem">${p.name}</div><div style="font-size:0.72rem;color:var(--text-muted)">${p.cat} · ${p.shipsTo}</div></div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--pi-gold)">${p.price}π</div>
+              </div>`).join('')}
+        </div>`;
+    } catch(e) { el.innerHTML='<div class="empty"><div class="empty-icon">⚠️</div><h3>Error loading profile</h3></div>'; }
   }
 
-  // ── Toast ──
+  // ── ADMIN ──
+  async function adminLogin() {
+    const pass=document.getElementById('adminPassInput').value;
+    try {
+      const res=await fetch(`${BACKEND}/admin/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pass})});
+      const data=await res.json();
+      if (data.success) {
+        document.getElementById('adminLoginPrompt').style.display='none';
+        document.getElementById('adminDashboard').style.display='block';
+        loadAdminDashboard(); showToast('✅ Admin access granted');
+      } else { showToast('❌ Wrong password'); }
+    } catch(e) { showToast('⚠️ Error'); }
+  }
+
+  async function loadAdminDashboard() {
+    try {
+      const res=await fetch(`${BACKEND}/admin/stats`,{headers:{'x-admin-password':ADMIN_KEY}});
+      const data=await res.json();
+      if (data.success) {
+        const s=data.stats;
+        document.getElementById('adminStats').innerHTML=[
+          [s.totalUsers,'Users'],[s.totalSellers,'Sellers'],
+          [s.pendingSellers,'Pending'],[s.totalProducts,'Products'],
+          [s.paidOrders,'Paid Orders'],[`${(s.totalRevenue||0).toFixed(1)}π`,'Revenue']
+        ].map(([v,l])=>`<div class="admin-stat"><div class="admin-stat-val">${v}</div><div class="admin-stat-lbl">${l}</div></div>`).join('');
+      }
+    } catch(e) {}
+
+    try {
+      const res=await fetch(`${BACKEND}/admin/pending-sellers`,{headers:{'x-admin-password':ADMIN_KEY}});
+      const data=await res.json();
+      const el=document.getElementById('pendingSellersList');
+      if (!data.users||!data.users.length) { el.innerHTML='<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:12px">No pending applications 🎉</div>'; }
+      else { el.innerHTML=data.users.map(u=>`
+        <div class="seller-row">
+          <div><div class="seller-name">${u.username}</div><div class="seller-meta">Applied ${new Date(u.createdAt).toLocaleDateString()}</div></div>
+          <div class="btn-row">
+            <button class="btn btn-primary btn-sm" onclick="adminApproveSeller('${u.username}')">✅ Approve</button>
+            <button class="btn btn-danger btn-sm" onclick="adminRejectSeller('${u.username}')">❌ Reject</button>
+          </div>
+        </div>`).join(''); }
+    } catch(e) {}
+
+    try {
+      const res=await fetch(`${BACKEND}/admin/orders`,{headers:{'x-admin-password':ADMIN_KEY}});
+      const data=await res.json();
+      const el=document.getElementById('adminOrdersList');
+      if (!data.orders||!data.orders.length) { el.innerHTML='<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:12px">No orders yet</div>'; }
+      else { el.innerHTML=data.orders.map(o=>`
+        <div class="admin-order">
+          <div class="admin-order-top"><div class="admin-order-name">${o.productName||'Product'}</div><span class="status-pill s-${o.status}">${o.status}</span></div>
+          <div class="admin-order-meta">👤 ${o.buyerUsername} → 🏪 ${o.sellerUsername} · ${o.amount}π · ${new Date(o.createdAt).toLocaleDateString()}</div>
+          <button class="btn btn-primary btn-sm" onclick="toggleUpdateForm('${o.paymentId}')">✏️ Update Status</button>
+          <div class="update-form" id="uf-${o.paymentId}">
+            <div class="form-row" style="margin-bottom:10px">
+              <div class="form-group" style="margin-bottom:0"><label>Status</label>
+                <select id="us-${o.paymentId}">
+                  <option value="paid" ${o.status==='paid'?'selected':''}>Paid</option>
+                  <option value="shipped" ${o.status==='shipped'?'selected':''}>Shipped</option>
+                  <option value="delivered" ${o.status==='delivered'?'selected':''}>Delivered</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:0"><label>Tracking #</label><input type="text" id="ut-${o.paymentId}" value="${o.trackingNumber||''}" placeholder="Optional"/></div>
+            </div>
+            <div class="form-group"><label>Note to Buyer</label><input type="text" id="un-${o.paymentId}" value="${o.statusNote||''}" placeholder="e.g. Dispatched via FedEx"/></div>
+            <button class="btn btn-gold btn-sm" onclick="adminUpdateOrder('${o.paymentId}')">💾 Save Changes</button>
+          </div>
+        </div>`).join(''); }
+    } catch(e) {}
+  }
+
+  function toggleUpdateForm(id) { const f=document.getElementById(`uf-${id}`); f.style.display=f.style.display==='block'?'none':'block'; }
+
+  async function adminApproveSeller(username) {
+    try {
+      await fetch(`${BACKEND}/admin/approve-seller`,{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':ADMIN_KEY},body:JSON.stringify({username})});
+      showToast(`✅ ${username} approved!`); loadAdminDashboard();
+    } catch(e) { showToast('⚠️ Error'); }
+  }
+
+  async function adminRejectSeller(username) {
+    try {
+      await fetch(`${BACKEND}/admin/reject-seller`,{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':ADMIN_KEY},body:JSON.stringify({username})});
+      showToast(`❌ ${username} rejected`); loadAdminDashboard();
+    } catch(e) { showToast('⚠️ Error'); }
+  }
+
+  async function adminUpdateOrder(paymentId) {
+    const status=document.getElementById(`us-${paymentId}`).value;
+    const trackingNumber=document.getElementById(`ut-${paymentId}`).value;
+    const statusNote=document.getElementById(`un-${paymentId}`).value;
+    try {
+      await fetch(`${BACKEND}/admin/update-order`,{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':ADMIN_KEY},body:JSON.stringify({paymentId,status,trackingNumber,statusNote})});
+      showToast('✅ Order updated!'); loadAdminDashboard();
+    } catch(e) { showToast('⚠️ Error'); }
+  }
+
+  // ── TABS ──
+  function switchTab(tab) {
+    const views={browse:'browseView',sell:'sellView',orders:'ordersView',profile:'profileView',admin:'adminView'};
+    Object.values(views).forEach(id=>document.getElementById(id).style.display='none');
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    document.getElementById(views[tab]).style.display='block';
+    const navEl=document.getElementById('nav-'+tab);
+    if (navEl) navEl.classList.add('active');
+    if (tab==='sell') updateSellView();
+    else if (tab==='orders') loadOrders();
+    else if (tab==='profile') loadProfile();
+  }
+
+  // ── TOAST ──
   function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),3000);
   }
 
-  // ── Init ──
+  // ── INIT ──
   renderCategories();
-  renderProducts();
+  loadProducts();
 </script>
 </body>
 </html>
